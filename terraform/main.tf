@@ -76,7 +76,7 @@ resource "google_storage_bucket_object" "blockchain_etl_dataflow" {
 resource "google_dataflow_flex_template_job" "flex_template_job" {
   provider                     = google-beta
   project                      = "${terraform.workspace}-im-data"
-  name                         = "zkevm-imtbl-testnet-13392-etl-dataflow-${formatdate("YYYYMMDD-hhmmss", timestamp())}"
+  name                         = "zkevm-imtbl-testnet-etl-dataflow-${formatdate("YYYYMMDD-hhmmss", timestamp())}"
   region                       = local.region
   skip_wait_on_job_termination = true
   container_spec_gcs_path      = "gs://${google_storage_bucket_object.blockchain_etl_dataflow.bucket}/${google_storage_bucket_object.blockchain_etl_dataflow.name}"
@@ -84,7 +84,7 @@ resource "google_dataflow_flex_template_job" "flex_template_job" {
 
 
   parameters = {
-    chainConfigFile = "/template/blockchain_zkevm_imtbl_testnet_13392_${terraform.workspace}.json"
+    chainConfigFile = "/template/blockchain_zkevm_imtbl_testnet_${terraform.workspace}.json"
     allowedTimestampSkewSeconds = "1814400"
     gcpTempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/temp"
     tempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/temp"
