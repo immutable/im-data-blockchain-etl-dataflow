@@ -6,4 +6,4 @@ ENV FLEX_TEMPLATE_JAVA_CLASSPATH=/template/*
 ENV FLEX_TEMPLATE_JAVA_MAIN_CLASS=io.blockchainetl.ethereum.EthereumPubSubToBigQueryPipeline
 
 COPY target/blockchain-etl-dataflow-bundled-0.1.jar /template/
-COPY chain-config/blockchain_zkevm_imtbl_testnet_13392_${env}.json /template/
+COPY chain-config/blockchain_zkevm_imtbl_testnet_${env}.json /template/
