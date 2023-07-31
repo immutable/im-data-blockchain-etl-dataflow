@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - d817test
   pull_request:
 
 name: Deploy blockchain etl datafow into GCP
@@ -49,6 +49,9 @@ jobs:
       id: login-gar
       run: |
          gcloud auth configure-docker us-docker.pkg.dev
+
+    - name: Build JAR
+      run: mvn -e -Pdataflow-runner package -DskipTests
 
     - name: Build, tag, and push image to Google Artifact Repository
       id: build-image-ecr

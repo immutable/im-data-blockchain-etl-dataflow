@@ -13,6 +13,7 @@ terraform/.terraform
 crash.log
 
 #java
+target/blockchain-etl-dataflow-bundled-0.1.jar
 target/classes
 target/generated-sources
 target/generated-test-sources
@@ -22,6 +23,7 @@ target/surefire-reports
 target/test-classes
 target/*dataflow-0.1*
 target/*original*
+
 
 
 # Ignore any .tfvars files that are generated automatically for each Terraform run. Most
