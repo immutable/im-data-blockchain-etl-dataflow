@@ -19,6 +19,8 @@ public class ConvertTransactionsToTableRowsFn extends ConvertEntitiesToTableRows
     protected void populateTableRowFields(TableRow row, String element) {
         Transaction transaction = JsonUtils.parseJson(element, Transaction.class);
 
+        System.out.println("Parsed chain_id: " + transaction.getChainId3());
+
         row.set("hash", transaction.getHash());
         row.set("nonce", transaction.getNonce());
         row.set("transaction_index", transaction.getTransactionIndex());
@@ -38,6 +40,7 @@ public class ConvertTransactionsToTableRowsFn extends ConvertEntitiesToTableRows
         row.set("max_fee_per_gas", transaction.getMaxFeePerGas());
         row.set("max_priority_fee_per_gas", transaction.getMaxPriorityFeePerGas());
         row.set("transaction_type", transaction.getTransactionType());
+        row.set("chain_id", transaction.getChainId3());
         row.set("receipt_effective_gas_price", transaction.getReceiptEffectiveGasPrice());
     }
 }

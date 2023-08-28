@@ -1,6 +1,7 @@
 package io.blockchainetl.ethereum.domain;
 
 import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.apache.avro.reflect.Nullable;
 import org.apache.beam.sdk.coders.AvroCoder;
 import org.apache.beam.sdk.coders.DefaultCoder;
@@ -79,6 +80,10 @@ public class Block {
     private Long timestamp;
 
     @Nullable
+    @JsonProperty("chain_id")
+    private String chain_id;
+
+    @Nullable
     @JsonProperty("transaction_count")
     private Long transactionCount;
 
@@ -110,6 +115,14 @@ public class Block {
 
     public void setNumber(Long number) {
         this.number = number;
+    }
+
+    public String getChainId2() {
+        return chain_id;
+    }
+
+    public void setChainId2(String chain_id) {
+        this.chain_id = chain_id;
     }
 
     public String getHash() {
@@ -270,6 +283,7 @@ public class Block {
         }
         Block block = (Block) o;
         return Objects.equal(type, block.type) &&
+            Objects.equal(chain_id, block.chain_id) &&
             Objects.equal(number, block.number) &&
             Objects.equal(hash, block.hash) &&
             Objects.equal(parentHash, block.parentHash) &&
@@ -295,7 +309,7 @@ public class Block {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(type, number, hash, parentHash, nonce, sha3Uncles, logsBloom, transactionsRoot,
+        return Objects.hashCode(type, chain_id, number, hash, parentHash, nonce, sha3Uncles, logsBloom, transactionsRoot,
             stateRoot,
             receiptsRoot, miner, difficulty, totalDifficulty, size, extraData, gasLimit, gasUsed, timestamp,
             transactionCount, baseFeePerGas, withdrawalsRoot, withdrawals);
@@ -303,8 +317,9 @@ public class Block {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
             .add("type", type)
+            .add("chain_id", chain_id)
             .add("number", number)
             .add("hash", hash)
             .add("parentHash", parentHash)

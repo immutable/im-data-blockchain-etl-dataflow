@@ -6,7 +6,9 @@ import io.blockchainetl.ethereum.domain.Withdrawal;
 import io.blockchainetl.common.utils.JsonUtils;
 import io.blockchainetl.common.fns.ConvertEntitiesToTableRowsFn;
 
-import java.net.HttpURLConnection;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 import java.net.URL;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,66 +16,13 @@ import java.util.Map;
 
 public class ConvertBlocksToTableRowsFn extends ConvertEntitiesToTableRowsFn {
 
-    private static final long TEN_MINUTES_IN_MILLIS = 10 * 60 * 1000;
-    private String cachedChainId;
-    private long lastFetchedTime = 0;
-
-    public ConvertBlocksToTableRowsFn(String startTimestamp, Long allowedTimestampSkewSeconds) {
-        super(startTimestamp, allowedTimestampSkewSeconds, "", false);
-    }
-
-    public ConvertBlocksToTableRowsFn(String startTimestamp, Long allowedTimestampSkewSeconds, String logPrefix) {
-        super(startTimestamp, allowedTimestampSkewSeconds, logPrefix, false);
-    }
-
-    private String getChainId() {
-        long currentTime = System.currentTimeMillis();
-        if (cachedChainId == null || (currentTime - lastFetchedTime) > TEN_MINUTES_IN_MILLIS) {
-            cachedChainId = fetchChainIdFromAPI();
-            lastFetchedTime = currentTime;
-        }
-        return cachedChainId;
-    }
-
-    private String fetchChainIdFromAPI() {
-        String apiUrl = "https://rpc.testnet.immutable.com/";
-        HttpURLConnection connection = null;
-    
-        try {
-            URL url = new URL(apiUrl);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-        
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-        
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            Map<String, Object> jsonResponse = JsonUtils.parseJson(response.toString(), Map.class);
-            return jsonResponse.get("chain_id").toString();
-
-        } catch (Exception e) {
-           System.err.println("Failed to fetch chain ID from API. Using default value: " + e.getMessage());
-           return "-1";
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-    }
-
 
     @Override
     protected void populateTableRowFields(TableRow row, String element) {
         Block block = JsonUtils.parseJson(element, Block.class);
-        String chainId = getChainId();
 
         row.set("number", block.getNumber());
-        row.set("chain_id", chainId);
+        row.set("chain_id", block.getChainId2());
         row.set("hash", block.getHash());
         row.set("parent_hash", block.getParentHash());
         row.set("nonce", block.getNonce());

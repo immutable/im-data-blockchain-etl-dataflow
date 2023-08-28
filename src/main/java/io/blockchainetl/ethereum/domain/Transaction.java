@@ -1,6 +1,7 @@
 package io.blockchainetl.ethereum.domain;
 
 import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.apache.avro.reflect.Nullable;
 import org.apache.beam.sdk.coders.AvroCoder;
 import org.apache.beam.sdk.coders.DefaultCoder;
@@ -90,6 +91,10 @@ public class Transaction {
     @Nullable
     @JsonProperty("transaction_type")
     private Long transactionType;
+
+    @Nullable
+    @JsonProperty("chain_id")
+    private String chain_id;
 
     @Nullable
     @JsonProperty("receipt_effective_gas_price")
@@ -229,6 +234,14 @@ public class Transaction {
         return blockHash;
     }
 
+    public String getChainId3() {
+        return chain_id;
+    }
+
+    public void setChainId3(String chain_id) {
+        this.chain_id = chain_id;
+    }
+
     public void setBlockHash(String blockHash) {
         this.blockHash = blockHash;
     }
@@ -287,6 +300,7 @@ public class Transaction {
             Objects.equal(maxFeePerGas, that.maxFeePerGas) &&
             Objects.equal(maxPriorityFeePerGas, that.maxPriorityFeePerGas) &&
             Objects.equal(transactionType, that.transactionType) &&
+            Objects.equal(chain_id, that.chain_id) &&
             Objects.equal(receiptEffectiveGasPrice, that.receiptEffectiveGasPrice);
     }
 
@@ -295,12 +309,12 @@ public class Transaction {
         return Objects.hashCode(type, hash, nonce, transactionIndex, fromAddress, toAddress, value, gas, gasPrice,
             input,
             receiptCumulativeGasUsed, receiptGasUsed, receiptContractAddress, receiptRoot, receiptStatus, blockNumber,
-            blockHash, blockTimestamp, maxFeePerGas, maxPriorityFeePerGas, transactionType, receiptEffectiveGasPrice);
+            blockHash, blockTimestamp, maxFeePerGas, maxPriorityFeePerGas, transactionType, chain_id, receiptEffectiveGasPrice);
     }
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
             .add("type", type)
             .add("hash", hash)
             .add("nonce", nonce)
@@ -322,6 +336,7 @@ public class Transaction {
             .add("maxFeePerGas", maxFeePerGas)
             .add("maxPriorityFeePerGas", maxPriorityFeePerGas)
             .add("transactionType", transactionType)
+            .add("chain_id", chain_id)
             .add("receiptEffectiveGasPrice", receiptEffectiveGasPrice)
             .toString();
     }
