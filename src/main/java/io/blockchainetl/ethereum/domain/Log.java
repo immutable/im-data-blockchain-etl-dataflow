@@ -47,6 +47,10 @@ public class Log {
     private Long blockNumber;
 
     @Nullable
+    @JsonProperty("chain_id")
+    private String chainId;
+
+    @Nullable
     @JsonProperty("block_hash")
     private String blockHash;
     
@@ -132,6 +136,14 @@ public class Log {
         this.blockHash = blockHash;
     }
 
+    public String getChainId() {
+        return chainId;
+    }
+
+    public void setChainId(String chainId) {
+        this.chainId = chainId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -150,14 +162,15 @@ public class Log {
             Objects.equal(topics, log.topics) &&
             Objects.equal(blockTimestamp, log.blockTimestamp) &&
             Objects.equal(blockNumber, log.blockNumber) &&
-            Objects.equal(blockHash, log.blockHash);
+            Objects.equal(blockHash, log.blockHash) &&
+            Objects.equal(chainId, log.chainId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(type, logIndex, transactionHash, transactionIndex, address, data, topics,
             blockTimestamp,
-            blockNumber, blockHash);
+            blockNumber, blockHash, chainId);
     }
 
     @Override
@@ -173,6 +186,7 @@ public class Log {
             .add("blockTimestamp", blockTimestamp)
             .add("blockNumber", blockNumber)
             .add("blockHash", blockHash)
+            .add("chainId", chainId)
             .toString();
     }
 

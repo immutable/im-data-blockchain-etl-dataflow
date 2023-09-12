@@ -81,7 +81,7 @@ public class Block {
 
     @Nullable
     @JsonProperty("chain_id")
-    private String chain_id;
+    private String chainId;
 
     @Nullable
     @JsonProperty("transaction_count")
@@ -117,12 +117,12 @@ public class Block {
         this.number = number;
     }
 
-    public String getChainId2() {
-        return chain_id;
+    public String getChainId() {
+        return chainId;
     }
 
-    public void setChainId2(String chain_id) {
-        this.chain_id = chain_id;
+    public void setChainId(String chainId) {
+        this.chainId = chainId;
     }
 
     public String getHash() {
@@ -283,7 +283,7 @@ public class Block {
         }
         Block block = (Block) o;
         return Objects.equal(type, block.type) &&
-            Objects.equal(chain_id, block.chain_id) &&
+            Objects.equal(chainId, block.chainId) &&
             Objects.equal(number, block.number) &&
             Objects.equal(hash, block.hash) &&
             Objects.equal(parentHash, block.parentHash) &&
@@ -309,7 +309,7 @@ public class Block {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(type, chain_id, number, hash, parentHash, nonce, sha3Uncles, logsBloom, transactionsRoot,
+        return Objects.hashCode(type, chainId, number, hash, parentHash, nonce, sha3Uncles, logsBloom, transactionsRoot,
             stateRoot,
             receiptsRoot, miner, difficulty, totalDifficulty, size, extraData, gasLimit, gasUsed, timestamp,
             transactionCount, baseFeePerGas, withdrawalsRoot, withdrawals);
@@ -319,7 +319,7 @@ public class Block {
     public String toString() {
         return MoreObjects.toStringHelper(this)
             .add("type", type)
-            .add("chain_id", chain_id)
+            .add("chainId", chainId)
             .add("number", number)
             .add("hash", hash)
             .add("parentHash", parentHash)

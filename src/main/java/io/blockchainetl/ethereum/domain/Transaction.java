@@ -94,7 +94,7 @@ public class Transaction {
 
     @Nullable
     @JsonProperty("chain_id")
-    private String chain_id;
+    private String chainId;
 
     @Nullable
     @JsonProperty("receipt_effective_gas_price")
@@ -234,12 +234,12 @@ public class Transaction {
         return blockHash;
     }
 
-    public String getChainId3() {
-        return chain_id;
+    public String getChainId() {
+        return chainId;
     }
 
-    public void setChainId3(String chain_id) {
-        this.chain_id = chain_id;
+    public void setChainId(String chainId) {
+        this.chainId = chainId;
     }
 
     public void setBlockHash(String blockHash) {
@@ -300,7 +300,7 @@ public class Transaction {
             Objects.equal(maxFeePerGas, that.maxFeePerGas) &&
             Objects.equal(maxPriorityFeePerGas, that.maxPriorityFeePerGas) &&
             Objects.equal(transactionType, that.transactionType) &&
-            Objects.equal(chain_id, that.chain_id) &&
+            Objects.equal(chainId, that.chainId) &&
             Objects.equal(receiptEffectiveGasPrice, that.receiptEffectiveGasPrice);
     }
 
@@ -309,7 +309,7 @@ public class Transaction {
         return Objects.hashCode(type, hash, nonce, transactionIndex, fromAddress, toAddress, value, gas, gasPrice,
             input,
             receiptCumulativeGasUsed, receiptGasUsed, receiptContractAddress, receiptRoot, receiptStatus, blockNumber,
-            blockHash, blockTimestamp, maxFeePerGas, maxPriorityFeePerGas, transactionType, chain_id, receiptEffectiveGasPrice);
+            blockHash, blockTimestamp, maxFeePerGas, maxPriorityFeePerGas, transactionType, chainId, receiptEffectiveGasPrice);
     }
 
     @Override
@@ -336,7 +336,7 @@ public class Transaction {
             .add("maxFeePerGas", maxFeePerGas)
             .add("maxPriorityFeePerGas", maxPriorityFeePerGas)
             .add("transactionType", transactionType)
-            .add("chain_id", chain_id)
+            .add("chainId", chainId)
             .add("receiptEffectiveGasPrice", receiptEffectiveGasPrice)
             .toString();
     }

@@ -13,15 +13,7 @@ terraform/.terraform
 crash.log
 
 #java
-target/classes
-target/generated-sources
-target/generated-test-sources
-target/maven-archiver
-target/maven-status
-target/surefire-reports
-target/test-classes
-target/*dataflow-0.1*
-target/*original*
+target/
 
 
 # Ignore any .tfvars files that are generated automatically for each Terraform run. Most

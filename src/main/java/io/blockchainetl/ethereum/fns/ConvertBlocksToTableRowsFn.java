@@ -6,23 +6,22 @@ import io.blockchainetl.ethereum.domain.Withdrawal;
 import io.blockchainetl.common.utils.JsonUtils;
 import io.blockchainetl.common.fns.ConvertEntitiesToTableRowsFn;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import java.net.URL;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Map;
-
 public class ConvertBlocksToTableRowsFn extends ConvertEntitiesToTableRowsFn {
 
+    public ConvertBlocksToTableRowsFn(String startTimestamp, Long allowedTimestampSkewSeconds) {
+        super(startTimestamp, allowedTimestampSkewSeconds, "", false);
+    }
+
+    public ConvertBlocksToTableRowsFn(String startTimestamp, Long allowedTimestampSkewSeconds, String logPrefix) {
+        super(startTimestamp, allowedTimestampSkewSeconds, logPrefix, false);
+    }
 
     @Override
     protected void populateTableRowFields(TableRow row, String element) {
         Block block = JsonUtils.parseJson(element, Block.class);
 
         row.set("number", block.getNumber());
-        row.set("chain_id", block.getChainId2());
+        row.set("chain_id", block.getChainId());
         row.set("hash", block.getHash());
         row.set("parent_hash", block.getParentHash());
         row.set("nonce", block.getNonce());
