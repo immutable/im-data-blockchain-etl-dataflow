@@ -1,6 +1,7 @@
 package io.blockchainetl.ethereum.domain;
 
 import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.apache.avro.reflect.Nullable;
 import org.apache.beam.sdk.coders.AvroCoder;
 import org.apache.beam.sdk.coders.DefaultCoder;
@@ -44,6 +45,10 @@ public class Log {
     @Nullable
     @JsonProperty("block_number")
     private Long blockNumber;
+
+    @Nullable
+    @JsonProperty("chain_id")
+    private String chainId;
 
     @Nullable
     @JsonProperty("block_hash")
@@ -131,6 +136,14 @@ public class Log {
         this.blockHash = blockHash;
     }
 
+    public String getChainId() {
+        return chainId;
+    }
+
+    public void setChainId(String chainId) {
+        this.chainId = chainId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -149,19 +162,20 @@ public class Log {
             Objects.equal(topics, log.topics) &&
             Objects.equal(blockTimestamp, log.blockTimestamp) &&
             Objects.equal(blockNumber, log.blockNumber) &&
-            Objects.equal(blockHash, log.blockHash);
+            Objects.equal(blockHash, log.blockHash) &&
+            Objects.equal(chainId, log.chainId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(type, logIndex, transactionHash, transactionIndex, address, data, topics,
             blockTimestamp,
-            blockNumber, blockHash);
+            blockNumber, blockHash, chainId);
     }
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
             .add("type", type)
             .add("logIndex", logIndex)
             .add("transactionHash", transactionHash)
@@ -172,6 +186,7 @@ public class Log {
             .add("blockTimestamp", blockTimestamp)
             .add("blockNumber", blockNumber)
             .add("blockHash", blockHash)
+            .add("chainId", chainId)
             .toString();
     }
 

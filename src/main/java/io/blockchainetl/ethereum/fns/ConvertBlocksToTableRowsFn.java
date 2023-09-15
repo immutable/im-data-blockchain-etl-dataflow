@@ -21,6 +21,7 @@ public class ConvertBlocksToTableRowsFn extends ConvertEntitiesToTableRowsFn {
         Block block = JsonUtils.parseJson(element, Block.class);
 
         row.set("number", block.getNumber());
+        row.set("chain_id", block.getChainId());
         row.set("hash", block.getHash());
         row.set("parent_hash", block.getParentHash());
         row.set("nonce", block.getNonce());

@@ -1,6 +1,7 @@
 package io.blockchainetl.eos.domain;
 
 import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.apache.avro.reflect.Nullable;
 import org.apache.beam.sdk.coders.AvroCoder;
 import org.apache.beam.sdk.coders.DefaultCoder;
@@ -159,7 +160,7 @@ public class Action {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
             .add("type", type)
             .add("transactionHash", transactionHash)
             .add("account", account)

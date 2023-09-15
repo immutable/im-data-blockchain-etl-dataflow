@@ -27,5 +27,7 @@ public class ConvertTokenTransfersToTableRowsFn extends ConvertEntitiesToTableRo
         row.set("log_index", tokenTransfer.getLogIndex());
         row.set("block_number", tokenTransfer.getBlockNumber());
         row.set("block_hash", tokenTransfer.getBlockHash());
+        row.set("chain_id", tokenTransfer.getChainId());
+        
     }
 }

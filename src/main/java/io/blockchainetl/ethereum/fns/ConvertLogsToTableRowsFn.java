@@ -27,5 +27,6 @@ public class ConvertLogsToTableRowsFn extends ConvertEntitiesToTableRowsFn {
         row.set("topics", log.getTopics());
         row.set("block_number", log.getBlockNumber());
         row.set("block_hash", log.getBlockHash());
+        row.set("chain_id", log.getChainId());
     }
 }

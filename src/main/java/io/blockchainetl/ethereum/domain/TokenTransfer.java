@@ -1,6 +1,7 @@
 package io.blockchainetl.ethereum.domain;
 
 import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.apache.avro.reflect.Nullable;
 import org.apache.beam.sdk.coders.AvroCoder;
 import org.apache.beam.sdk.coders.DefaultCoder;
@@ -47,6 +48,10 @@ public class TokenTransfer {
     @Nullable
     @JsonProperty("block_hash")
     private String blockHash;
+
+    @Nullable
+    @JsonProperty("chain_id")
+    private String chainId;
     
     public TokenTransfer() {}
 
@@ -122,6 +127,14 @@ public class TokenTransfer {
         this.blockHash = blockHash;
     }
 
+    public String getChainId() {
+        return chainId;
+    }
+
+    public void setChainId(String chainId) {
+        this.chainId = chainId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -139,18 +152,19 @@ public class TokenTransfer {
             Objects.equal(logIndex, that.logIndex) &&
             Objects.equal(blockTimestamp, that.blockTimestamp) &&
             Objects.equal(blockNumber, that.blockNumber) &&
-            Objects.equal(blockHash, that.blockHash);
+            Objects.equal(blockHash, that.blockHash) &&
+            Objects.equal(chainId, that.chainId);
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(tokenAddress, fromAddress, toAddress, value, transactionHash, logIndex, blockTimestamp,
-            blockNumber, blockHash);
+            blockNumber, blockHash, chainId);
     }
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
             .add("tokenAddress", tokenAddress)
             .add("fromAddress", fromAddress)
             .add("toAddress", toAddress)
@@ -160,6 +174,7 @@ public class TokenTransfer {
             .add("blockTimestamp", blockTimestamp)
             .add("blockNumber", blockNumber)
             .add("blockHash", blockHash)
+            .add("chainId", chainId)
             .toString();
     }
 }

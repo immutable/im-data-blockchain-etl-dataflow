@@ -39,4 +39,4 @@ gcp.ar.push: docker.build gcp.ar.login
 	$(call push_image,${image_name})
 
 generate.jar:
-	mvn -e -Pdataflow-runner package -DskipTests
+	mvn -X -e -Pdataflow-runner package -DskipTests
