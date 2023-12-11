@@ -98,3 +98,30 @@ resource "google_dataflow_flex_template_job" "flex_template_job" {
     zone=local.zone
   }
 }
+
+
+resource "google_dataflow_flex_template_job" "zkevm_imtbl_mainnet_job" {
+  provider                     = google-beta
+  project                      = "${terraform.workspace}-im-data"
+  name                         = "zkevm-imtbl-mainnet-etl-dataflow-${formatdate("YYYYMMDD-hhmmss", timestamp())}"
+  region                       = local.region
+  skip_wait_on_job_termination = true
+  container_spec_gcs_path      = "gs://${google_storage_bucket_object.blockchain_etl_dataflow.bucket}/${google_storage_bucket_object.blockchain_etl_dataflow.name}"
+  on_delete                    = "drain"
+
+
+  parameters = {
+    chainConfigFile = "/template/blockchain_zkevm_imtbl_mainnet_${terraform.workspace}.json"
+    allowedTimestampSkewSeconds = "5184000"
+    gcpTempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/zkevm-imtbl-mainnet-streaming/temp"
+    tempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/zkevm-imtbl-mainnet-streaming/temp"
+    project = "${terraform.workspace}-im-data"
+    runner = "DataflowRunner"
+    workerMachineType = "n1-standard-1"
+    maxNumWorkers = 1
+    diskSizeGb=30
+    enableStreamingEngine=true
+    region=local.region
+    zone=local.zone
+  }
+}
