@@ -94,7 +94,7 @@ public class Transaction {
 
     @Nullable
     @JsonProperty("chain_id")
-    private String chainId;
+    private Long chainId;
 
     @Nullable
     @JsonProperty("receipt_effective_gas_price")
@@ -234,11 +234,11 @@ public class Transaction {
         return blockHash;
     }
 
-    public String getChainId() {
+    public Long getChainId() {
         return chainId;
     }
 
-    public void setChainId(String chainId) {
+    public void setChainId(Long chainId) {
         this.chainId = chainId;
     }
 

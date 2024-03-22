@@ -21,6 +21,10 @@ public class Contract {
     private String address;
 
     @Nullable
+    @JsonProperty("chain_id")
+    private Long chainId;
+
+    @Nullable
     private String bytecode;
 
     @Nullable
@@ -34,7 +38,11 @@ public class Contract {
     @Nullable
     @JsonProperty("is_erc721")
     private Boolean isErc721;
-    
+
+    @Nullable
+    @JsonProperty("is_erc1155")
+    private Boolean isErc1155;
+
     @Nullable
     @JsonProperty("block_timestamp")
     private Long blockTimestamp;
@@ -65,6 +73,14 @@ public class Contract {
         this.address = address;
     }
 
+    public Long getChainId() {
+        return chainId;
+    }
+
+    public void setChainId(Long chainId) {
+        this.chainId = chainId;
+    }
+
     public String getBytecode() {
         return bytecode;
     }
@@ -86,7 +102,7 @@ public class Contract {
     }
 
     public void setErc20(Boolean erc20) {
-        isErc20 = erc20;
+        this.isErc20 = erc20;
     }
 
     public Boolean getErc721() {
@@ -94,7 +110,15 @@ public class Contract {
     }
 
     public void setErc721(Boolean erc721) {
-        isErc721 = erc721;
+        this.isErc721 = erc721;
+    }
+
+    public Boolean getErc1155() {
+        return isErc1155;
+    }
+
+    public void setErc1155(Boolean erc1155) {
+        this.isErc1155 = erc1155;
     }
 
     public Long getBlockTimestamp() {
@@ -132,10 +156,12 @@ public class Contract {
         Contract contract = (Contract) o;
         return Objects.equal(type, contract.type) &&
             Objects.equal(address, contract.address) &&
+            Objects.equal(chainId, contract.chainId) &&
             Objects.equal(bytecode, contract.bytecode) &&
             Objects.equal(functionSighashes, contract.functionSighashes) &&
             Objects.equal(isErc20, contract.isErc20) &&
             Objects.equal(isErc721, contract.isErc721) &&
+            Objects.equal(isErc1155, contract.isErc1155) &&
             Objects.equal(blockTimestamp, contract.blockTimestamp) &&
             Objects.equal(blockNumber, contract.blockNumber) &&
             Objects.equal(blockHash, contract.blockHash);
@@ -143,7 +169,7 @@ public class Contract {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(type, address, bytecode, functionSighashes, isErc20, isErc721, blockTimestamp,
+        return Objects.hashCode(type, address, chainId, bytecode, functionSighashes, isErc20, isErc721, blockTimestamp,
             blockNumber,
             blockHash);
     }
@@ -153,10 +179,12 @@ public class Contract {
         return MoreObjects.toStringHelper(this)
             .add("type", type)
             .add("address", address)
+            .add("chainId", chainId)
             .add("bytecode", bytecode)
             .add("functionSighashes", functionSighashes)
             .add("isErc20", isErc20)
             .add("isErc721", isErc721)
+            .add("isErc1155", isErc1155)
             .add("blockTimestamp", blockTimestamp)
             .add("blockNumber", blockNumber)
             .add("blockHash", blockHash)

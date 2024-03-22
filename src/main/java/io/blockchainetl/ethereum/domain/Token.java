@@ -19,6 +19,10 @@ public class Token {
     private String address;
 
     @Nullable
+    @JsonProperty("chain_id")
+    private Long chainId;
+
+    @Nullable
     private String symbol;
 
     @Nullable
@@ -60,6 +64,14 @@ public class Token {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Long getChainId() {
+        return chainId;
+    }
+
+    public void setChainId(Long chainId) {
+        this.chainId = chainId;
     }
 
     public String getSymbol() {
@@ -129,6 +141,7 @@ public class Token {
         Token token = (Token) o;
         return Objects.equal(type, token.type) &&
             Objects.equal(address, token.address) &&
+            Objects.equal(chainId, token.chainId) &&
             Objects.equal(symbol, token.symbol) &&
             Objects.equal(name, token.name) &&
             Objects.equal(decimals, token.decimals) &&
@@ -140,7 +153,7 @@ public class Token {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(type, address, symbol, name, decimals, totalSupply, blockTimestamp, blockNumber,
+        return Objects.hashCode(type, address, chainId, symbol, name, decimals, totalSupply, blockTimestamp, blockNumber,
             blockHash);
     }
 
@@ -149,6 +162,7 @@ public class Token {
         return MoreObjects.toStringHelper(this)
             .add("type", type)
             .add("address", address)
+            .add("chainId", chainId)
             .add("symbol", symbol)
             .add("name", name)
             .add("decimals", decimals)

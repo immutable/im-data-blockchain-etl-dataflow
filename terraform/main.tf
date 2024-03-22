@@ -73,7 +73,7 @@ resource "google_storage_bucket_object" "blockchain_etl_dataflow" {
 }
 
 
-resource "google_dataflow_flex_template_job" "flex_template_job" {
+resource "google_dataflow_flex_template_job" "zkevm_imtbl_testnet_job" {
   provider                     = google-beta
   project                      = "${terraform.workspace}-im-data"
   name                         = "zkevm-imtbl-testnet-etl-dataflow-${formatdate("YYYYMMDD-hhmmss", timestamp())}"
@@ -86,8 +86,8 @@ resource "google_dataflow_flex_template_job" "flex_template_job" {
   parameters = {
     chainConfigFile = "/template/blockchain_zkevm_imtbl_testnet_${terraform.workspace}.json"
     allowedTimestampSkewSeconds = "5184000"
-    gcpTempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/temp"
-    tempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/temp"
+    gcpTempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/zkevm-imtbl-testnet-streaming/temp"
+    tempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/zkevm-imtbl-testnet-streaming/temp"
     project = "${terraform.workspace}-im-data"
     runner = "DataflowRunner"
     workerMachineType = "n1-standard-1"
