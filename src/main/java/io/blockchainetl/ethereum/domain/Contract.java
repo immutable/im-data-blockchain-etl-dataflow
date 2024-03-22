@@ -169,7 +169,7 @@ public class Contract {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(type, address, chainId, bytecode, functionSighashes, isErc20, isErc721, blockTimestamp,
+        return Objects.hashCode(type, address, chainId, bytecode, functionSighashes, isErc20, isErc721, isErc1155, blockTimestamp,
             blockNumber,
             blockHash);
     }
