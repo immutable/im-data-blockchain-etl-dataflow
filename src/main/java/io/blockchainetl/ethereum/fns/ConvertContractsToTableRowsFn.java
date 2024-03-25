@@ -20,10 +20,12 @@ public class ConvertContractsToTableRowsFn extends ConvertEntitiesToTableRowsFn 
         Contract contract = JsonUtils.parseJson(element, Contract.class);
 
         row.set("address", contract.getAddress());
+        row.set("chain_id", contract.getChainId());
         row.set("bytecode", contract.getBytecode());
         row.set("function_sighashes", contract.getFunctionSighashes());
         row.set("is_erc20", contract.getErc20());
         row.set("is_erc721", contract.getErc721());
+        row.set("is_erc1155", contract.getErc1155());
         row.set("block_number", contract.getBlockNumber());
         row.set("block_hash", contract.getBlockHash());
     }

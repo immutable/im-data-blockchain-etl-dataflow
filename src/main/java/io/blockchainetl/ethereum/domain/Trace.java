@@ -24,6 +24,10 @@ public class Trace {
     private Long transactionIndex;
 
     @Nullable
+    @JsonProperty("chain_id")
+    private Long chainId;
+
+    @Nullable
     @JsonProperty("from_address")
     private String fromAddress;
 
@@ -104,6 +108,14 @@ public class Trace {
 
     public void setTransactionIndex(Long transactionIndex) {
         this.transactionIndex = transactionIndex;
+    }
+
+    public Long getChainId() {
+        return chainId;
+    }
+
+    public void setChainId(Long chainId) {
+        this.chainId = chainId;
     }
 
     public String getFromAddress() {
@@ -262,6 +274,7 @@ public class Trace {
         return Objects.equal(transactionHash, trace.transactionHash) &&
             Objects.equal(transactionIndex, trace.transactionIndex) &&
             Objects.equal(fromAddress, trace.fromAddress) &&
+            Objects.equal(chainId, trace.chainId) &&
             Objects.equal(toAddress, trace.toAddress) &&
             Objects.equal(value, trace.value) &&
             Objects.equal(input, trace.input) &&
@@ -285,8 +298,7 @@ public class Trace {
     public int hashCode() {
         return Objects.hashCode(transactionHash, transactionIndex, fromAddress, toAddress, value,
             input, output, traceType, callType, rewardType, gas, gasUsed, subtraces, traceAddress, error, status,
-            traceId,
-            blockTimestamp, blockNumber, blockHash);
+            traceId,blockTimestamp, blockNumber, blockHash, chainId);
     }
 
     @Override
@@ -294,6 +306,7 @@ public class Trace {
         return MoreObjects.toStringHelper(this)
             .add("transactionHash", transactionHash)
             .add("transactionIndex", transactionIndex)
+            .add("chainId", chainId)
             .add("fromAddress", fromAddress)
             .add("toAddress", toAddress)
             .add("value", value)

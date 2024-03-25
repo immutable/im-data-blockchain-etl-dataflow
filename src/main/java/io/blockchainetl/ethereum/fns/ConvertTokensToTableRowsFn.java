@@ -20,6 +20,7 @@ public class ConvertTokensToTableRowsFn extends ConvertEntitiesToTableRowsFn {
         Token token = JsonUtils.parseJson(element, Token.class);
 
         row.set("address", token.getAddress());
+        row.set("chain_id", token.getChainId());
         row.set("symbol", token.getSymbol());
         row.set("name", token.getName());
         row.set("decimals", token.getDecimals());
