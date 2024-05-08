@@ -112,7 +112,7 @@ resource "google_dataflow_flex_template_job" "zkevm_imtbl_mainnet_job" {
 
   parameters = {
     chainConfigFile = "/template/blockchain_zkevm_imtbl_mainnet_${terraform.workspace}.json"
-    allowedTimestampSkewSeconds = "31536000"
+    allowedTimestampSkewSeconds = "5184000"
     gcpTempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/zkevm-imtbl-mainnet-streaming/temp"
     tempLocation = "gs://${terraform.workspace}-im-data-imx-resource/ethereum-etl/zkevm-imtbl-mainnet-streaming/temp"
     project = "${terraform.workspace}-im-data"
