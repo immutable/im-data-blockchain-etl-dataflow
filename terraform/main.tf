@@ -118,7 +118,7 @@ resource "google_dataflow_flex_template_job" "zkevm_imtbl_mainnet_job" {
     project = "${terraform.workspace}-im-data"
     runner = "DataflowRunner"
     workerMachineType = "n1-standard-1"
-    maxNumWorkers = 1
+    maxNumWorkers = 4
     diskSizeGb=30
     enableStreamingEngine=true
     region=local.region
