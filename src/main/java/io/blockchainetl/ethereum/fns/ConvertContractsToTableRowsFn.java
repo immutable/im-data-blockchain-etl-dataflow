@@ -26,6 +26,8 @@ public class ConvertContractsToTableRowsFn extends ConvertEntitiesToTableRowsFn 
         row.set("is_erc20", contract.getErc20());
         row.set("is_erc721", contract.getErc721());
         row.set("is_erc1155", contract.getErc1155());
+        row.set("proxy_type", contract.getProxyType());
+        row.set("implementation_address", contract.getImplementationAddress());
         row.set("block_number", contract.getBlockNumber());
         row.set("block_hash", contract.getBlockHash());
     }
