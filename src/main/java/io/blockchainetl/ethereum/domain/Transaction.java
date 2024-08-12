@@ -46,6 +46,9 @@ public class Transaction {
     private Long gasPrice;
 
     @Nullable
+    private String sighash;
+
+    @Nullable
     private String input;
 
     @Nullable
@@ -174,6 +177,14 @@ public class Transaction {
         this.gasPrice = gasPrice;
     }
 
+    public String getSighash() {
+        return sighash;
+    }
+
+    public void setSighash(String sighash) {
+        this.sighash = sighash;
+    }
+
     public String getInput() {
         return input;
     }
@@ -288,6 +299,7 @@ public class Transaction {
             Objects.equal(value, that.value) &&
             Objects.equal(gas, that.gas) &&
             Objects.equal(gasPrice, that.gasPrice) &&
+            Objects.equal(sighash, that.sighash) &&
             Objects.equal(input, that.input) &&
             Objects.equal(receiptCumulativeGasUsed, that.receiptCumulativeGasUsed) &&
             Objects.equal(receiptGasUsed, that.receiptGasUsed) &&
@@ -307,7 +319,7 @@ public class Transaction {
     @Override
     public int hashCode() {
         return Objects.hashCode(type, hash, nonce, transactionIndex, fromAddress, toAddress, value, gas, gasPrice,
-            input,
+            sighash, input,
             receiptCumulativeGasUsed, receiptGasUsed, receiptContractAddress, receiptRoot, receiptStatus, blockNumber,
             blockHash, blockTimestamp, maxFeePerGas, maxPriorityFeePerGas, transactionType, chainId, receiptEffectiveGasPrice);
     }
@@ -324,6 +336,7 @@ public class Transaction {
             .add("value", value)
             .add("gas", gas)
             .add("gasPrice", gasPrice)
+            .add("sighash", sighash)
             .add("input", input)
             .add("receiptCumulativeGasUsed", receiptCumulativeGasUsed)
             .add("receiptGasUsed", receiptGasUsed)

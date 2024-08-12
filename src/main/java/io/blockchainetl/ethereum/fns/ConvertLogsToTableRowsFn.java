@@ -23,6 +23,7 @@ public class ConvertLogsToTableRowsFn extends ConvertEntitiesToTableRowsFn {
         row.set("transaction_hash", log.getTransactionHash());
         row.set("transaction_index", log.getTransactionIndex());
         row.set("address", log.getAddress());
+        row.set("sighash", log.getSighash());
         row.set("data", log.getData());
         row.set("topics", log.getTopics());
         row.set("block_number", log.getBlockNumber());

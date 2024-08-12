@@ -39,6 +39,9 @@ public class Trace {
     private BigInteger value;
 
     @Nullable
+    private String sighash;
+
+    @Nullable
     private String input;
 
     @Nullable
@@ -140,6 +143,14 @@ public class Trace {
 
     public void setValue(BigInteger value) {
         this.value = value;
+    }
+
+    public String getSighash() {
+        return sighash;
+    }
+
+    public void setSighash(String sighash) {
+        this.sighash = sighash;
     }
 
     public String getInput() {
@@ -277,6 +288,7 @@ public class Trace {
             Objects.equal(chainId, trace.chainId) &&
             Objects.equal(toAddress, trace.toAddress) &&
             Objects.equal(value, trace.value) &&
+            Objects.equal(sighash,trace.sighash) &&
             Objects.equal(input, trace.input) &&
             Objects.equal(output, trace.output) &&
             Objects.equal(traceType, trace.traceType) &&
@@ -297,8 +309,8 @@ public class Trace {
     @Override
     public int hashCode() {
         return Objects.hashCode(transactionHash, transactionIndex, fromAddress, toAddress, value,
-            input, output, traceType, callType, rewardType, gas, gasUsed, subtraces, traceAddress, error, status,
-            traceId,blockTimestamp, blockNumber, blockHash, chainId);
+            sighash, input, output, traceType, callType, rewardType, gas, gasUsed, subtraces, traceAddress, error,
+            status, traceId,blockTimestamp, blockNumber, blockHash, chainId);
     }
 
     @Override
@@ -310,6 +322,7 @@ public class Trace {
             .add("fromAddress", fromAddress)
             .add("toAddress", toAddress)
             .add("value", value)
+            .add("sighash", sighash)
             .add("input", input)
             .add("output", output)
             .add("traceType", traceType)
