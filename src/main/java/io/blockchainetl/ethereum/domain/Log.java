@@ -33,6 +33,9 @@ public class Log {
     private String address;
 
     @Nullable
+    private String sighash;
+
+    @Nullable
     private String data;
 
     @Nullable
@@ -94,6 +97,14 @@ public class Log {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getSighash() {
+        return sighash;
+    }
+
+    public void setSighash(String sighash) {
+        this.sighash = sighash;
     }
 
     public String getData() {
@@ -158,6 +169,7 @@ public class Log {
             Objects.equal(transactionHash, log.transactionHash) &&
             Objects.equal(transactionIndex, log.transactionIndex) &&
             Objects.equal(address, log.address) &&
+            Objects.equal(sighash, log.sighash) &&
             Objects.equal(data, log.data) &&
             Objects.equal(topics, log.topics) &&
             Objects.equal(blockTimestamp, log.blockTimestamp) &&
@@ -168,7 +180,7 @@ public class Log {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(type, logIndex, transactionHash, transactionIndex, address, data, topics,
+        return Objects.hashCode(type, logIndex, transactionHash, transactionIndex, address, sighash, data, topics,
             blockTimestamp,
             blockNumber, blockHash, chainId);
     }
@@ -181,6 +193,7 @@ public class Log {
             .add("transactionHash", transactionHash)
             .add("transactionIndex", transactionIndex)
             .add("address", address)
+            .add("sighash", sighash)
             .add("data", data)
             .add("topics", topics)
             .add("blockTimestamp", blockTimestamp)

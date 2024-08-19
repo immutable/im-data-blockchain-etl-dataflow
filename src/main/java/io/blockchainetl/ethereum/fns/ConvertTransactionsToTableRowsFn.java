@@ -27,6 +27,7 @@ public class ConvertTransactionsToTableRowsFn extends ConvertEntitiesToTableRows
         row.set("value", transaction.getValue() != null ? transaction.getValue().toString() : null);
         row.set("gas", transaction.getGas());
         row.set("gas_price", transaction.getGasPrice());
+        row.set("sighash", transaction.getSighash());
         row.set("input", transaction.getInput());
         row.set("receipt_cumulative_gas_used", transaction.getReceiptCumulativeGasUsed());
         row.set("receipt_gas_used", transaction.getReceiptGasUsed());
