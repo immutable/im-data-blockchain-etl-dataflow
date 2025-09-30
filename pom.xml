@@ -31,7 +31,7 @@
 
     <bigquery.version>v2-rev20220716-1.32.1</bigquery.version>
     <google-clients.version>2.2.0</google-clients.version>
-    <guava.version>29.0-jre</guava.version>
+    <guava.version>32.0.0-jre</guava.version>
     <hamcrest.version>1.3</hamcrest.version>
     <jackson.version>2.14.1</jackson.version>
     <joda.version>2.4</joda.version>
